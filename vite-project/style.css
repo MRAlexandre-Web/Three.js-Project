@@ -1,0 +1,6 @@
+canvas {
+  /* able to overlay elements this way */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
