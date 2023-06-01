@@ -33,22 +33,14 @@ scene.add(planetY)
 
 const innerLight = new THREE.AmbientLight(0xffffff);
 const sunRays = new THREE.DirectionalLight(0xff9a3c, 1);
-const sunRayRef = new THREE.DirectionalLightHelper(sunRays)
-// sunRayRef.position.set(5, 10, 5);
 sunRays.position.set(-9, 15, -10)
 sunRays.intensity = 2 //makes directional light brighter//
-sunRays.target = planetY //point light to object
+sunRays.target = planetY //point light to object planey y//
 
-// scene.add(sunRayRef)
 scene.add(innerLight);
 scene.add(sunRays);
 
-
-
-const planeGeometry = new THREE.PlaneGeometry(100, 100)
-const planeMaterial = new THREE.MeshBasicMaterial({color: 0xfffff})
-const referencePlane = new THREE.Mesh(planeGeometry, planeMaterial)
-
+// made for planet(2) to continuously spin/orbit//
 function animate(time) {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
@@ -59,12 +51,10 @@ function animate(time) {
 
 renderer.setAnimationLoop(animate)
 
-
+//used as reference of axis//
 const grid = new THREE.GridHelper(50); //param 1 increases surface area of grid, param 2 divides boxes in grid//
-referencePlane.rotation.x = -0.5 * Math.PI
 scene.add(grid)
 
-// scene.add(referencePlane)
 
 function stars() {
   const geometry = new THREE.SphereGeometry(0.25)
