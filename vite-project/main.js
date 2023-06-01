@@ -2,8 +2,9 @@ import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls' //to use mouse to move around//
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 
-const planetXImg = new THREE.TextureLoader().load('Sun Layout.jpg')
-
+//textures for objects//
+const planetXImg = new THREE.TextureLoader().load('Sun Layout.jpg');
+const planetYImg = new THREE.TextureLoader().load('mercury layout.png');
 //Three objects needed//
 const scene = new THREE.Scene(); //stage which encompases all objects
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000); //FOV, Aspect ratio, how much you see//
@@ -23,9 +24,20 @@ const planetX = new THREE.Mesh(planetGeometry, planetMaterial);
 
 scene.add(planetX);
 
+const smallPlanetGeometry = new THREE.SphereGeometry(9, 18, 16);
+const smallPlanetMaterial = new THREE.MeshStandardMaterial({map: planetYImg});
+const planetY = new THREE.Mesh(smallPlanetGeometry, smallPlanetMaterial);
+planetY.position.set(-20, 20, -20);
+
+scene.add(planetY)
+
 const innerLight = new THREE.AmbientLight(0xffffff);
 const sunRays = new THREE.DirectionalLight(0xfffff) 
 scene.add(innerLight);
+
+// scene.add(sunRays);
+
+
 
 const planeGeometry = new THREE.PlaneGeometry(100, 100)
 const planeMaterial = new THREE.MeshBasicMaterial({color: 0xfffff})
@@ -46,7 +58,7 @@ const grid = new THREE.GridHelper(50); //param 1 increases surface area of grid,
 referencePlane.rotation.x = -0.5 * Math.PI
 scene.add(grid)
 
-scene.add(referencePlane)
+// scene.add(referencePlane)
 
 function stars() {
   const geometry = new THREE.SphereGeometry(0.25)
@@ -61,7 +73,7 @@ function stars() {
 
 Array(200).fill().forEach(stars)
 
-const space = new THREE.TextureLoader().load('space layout.jpg');
-scene.background = space
+// const space = new THREE.TextureLoader().load('space layout.jpg');
+// scene.background = space
 
 
