@@ -7,7 +7,7 @@ const planetXImg = new THREE.TextureLoader().load('Sun Layout.jpg');
 const planetYImg = new THREE.TextureLoader().load('mercury layout.png');
 //Three objects needed//
 const scene = new THREE.Scene(); //stage which encompases all objects
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000); //FOV, Aspect ratio, how much you see//
+const camera = new THREE.PerspectiveCamera(85, window.innerWidth/window.innerHeight, 0.1, 1000); //FOV, Aspect ratio, how much you see//
 const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('app')});
 const controls = new OrbitControls(camera, document.getElementById('app')); //controls require camera to function//c 
 
@@ -24,7 +24,7 @@ const planetX = new THREE.Mesh(planetGeometry, planetMaterial);
 
 scene.add(planetX);
 
-const smallPlanetGeometry = new THREE.SphereGeometry(9, 18, 16);
+const smallPlanetGeometry = new THREE.SphereGeometry(6, 18, 16);
 const smallPlanetMaterial = new THREE.MeshStandardMaterial({map: planetYImg});
 const planetY = new THREE.Mesh(smallPlanetGeometry, smallPlanetMaterial);
 planetY.position.set(-20, 20, -20);
@@ -32,10 +32,16 @@ planetY.position.set(-20, 20, -20);
 scene.add(planetY)
 
 const innerLight = new THREE.AmbientLight(0xffffff);
-const sunRays = new THREE.DirectionalLight(0xfffff) 
-scene.add(innerLight);
+const sunRays = new THREE.DirectionalLight(0xff9a3c, 1);
+const sunRayRef = new THREE.DirectionalLightHelper(sunRays)
+// sunRayRef.position.set(5, 10, 5);
+sunRays.position.set(-9, 15, -10)
+sunRays.intensity = 2 //makes directional light brighter//
+sunRays.target = planetY //point light to object
 
-// scene.add(sunRays);
+// scene.add(sunRayRef)
+scene.add(innerLight);
+scene.add(sunRays);
 
 
 
