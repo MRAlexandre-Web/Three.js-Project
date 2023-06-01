@@ -45,15 +45,12 @@ function animate(time) {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
   planetX.rotation.y = time / 5000;
-
+  controls.update();
 
 }
 
 renderer.setAnimationLoop(animate)
 
-//used as reference of axis//
-const grid = new THREE.GridHelper(50); //param 1 increases surface area of grid, param 2 divides boxes in grid//
-scene.add(grid)
 
 
 function stars() {
@@ -69,7 +66,12 @@ function stars() {
 
 Array(200).fill().forEach(stars)
 
-// const space = new THREE.TextureLoader().load('space layout.jpg');
-// scene.background = space
+const space = new THREE.TextureLoader().load('space layout.jpg');
+scene.background = space
 
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
 

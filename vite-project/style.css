@@ -1,6 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body {
+  overflow: hidden;
+}
 canvas {
-  /* able to overlay elements this way */
   position: fixed;
   top: 0;
   left: 0;
+}
+
+main {
+  position: absolute;
+  color: white;
+  margin: 0px auto;
+  z-index: 99;
+  width: 30%;
+  padding: 120px 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+header {
+  text-align: center;
+  background-color: #222831;
+  grid-column: 2 / span 10;
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+section {
+  grid-column: 2 / span 10;
+  padding: 1rem;
+  background-color: #222831;
+  line-height: 1.5;
+  font-size: 1.25rem;
+  margin-bottom: 20px;
 }
